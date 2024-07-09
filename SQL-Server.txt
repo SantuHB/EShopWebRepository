@@ -1,0 +1,627 @@
+
+	
+		SQL SERVER
+	
+	DDL(DATA DEFINITION LANGUAGE)
+
+		STRUCTURE OF TABLE OR DATABASE
+		CREATE ALTER TRUNCATE DROP 
+
+	CREATE	-DATABASE OR TABLE OR STORED PROCEDURE , FUNCTION , TRIGGER , VIEW 
+
+	ALTER --> ADD COLUMN OR REMOVE COLUMN , 
+		ADD PRIMARY KEY OR FOREIGN KEY FOR EXISTING TABLE
+	
+		CHANGE TABLE_NAME OR DB_NAME 
+				----> PRE-DEFINED STORED PROCEDURE 
+	
+		DROP		---->  REMOVE TABLE OR DB 
+
+		TRUNCATE 	----> REMOVE TABLE 
+
+		DROP 	    V/S			TRUNCATE 
+
+	REMOVE TABLE STRUCTURE + MEMORY      TABLE STRUCTURE PRESENT -COL NAMES --
+	
+	DELETE 		    		V/S 		TRUNCATE 
+
+	TABLE STRUCTURE PRESENT 		   TABLE STRUCTURE PRESENT 
+						   -COL NAMES --
+	-COL NAMES --
+	
+	ROLLBACK CAN BE DONE 			   ROLLBACK CAN'T BE DONE 
+
+	DML(DATA MANIPULATION LANGUAGE)
+		CHANGE VALUES STORED IN TABLE 
+
+		INSERT
+			ADD A NEW RECORD(ROW) TO TABLE 
+		DELETE
+			DELETE A SINGLE ROW OR MULTIPLE ROWS FROM TABLE 
+			DELETE ALL ROWS (TABLE) FROM TABLE 
+
+		UPDATE
+			MODIFY SPECIFIC COLUMN VALUE OR 
+			MULTIPLE COLUMN VALUES FROM TABLE
+
+		ADD NEW RECORD(ROW) , REMOVE A RECORD(ROW)
+		DELETE ALL RECORDS(ROWS) , 
+		MODIFY PARTICULAR COLUMN VALUE 
+		BY ID MODIFY EMPNAME & EMAIL_ID
+	DATA QUERY LANGUAGE
+		SELECT
+
+	TCL(TRANSACTION CONTROL LANGUAGE)
+		COMMIT , ROLLBACK , SAVEPOINT
+
+	TRANSFER AMOUNT 
+	
+	FROM_ACCOUNT		TO_ACCOUNT
+
+	1. SELECT CHECK_BALANCE FROM FROM_ACCOUNT			-OK
+
+	2.	UPDATE DEBIT AMOUNT AND CREDIT AMOUNT FROM 		NOT OK
+		FROM_ACCOUNT AND TO_ACCOUNT
+
+	3.	SELECT AND INSERT TO TRANSACTION_TABLE -REPORT 
+									OK
+		ONLINE_TRANSACTION -SUCCESS 
+
+	ALL 3 STATEMENTS DONE 	--TRANSFER AMOUNT ---> 	SUCCESS ---COMMIT
+
+	IF ANY STATEMENT FAIL   - CANCEL WHOLE TRANSACTION ---> FAIL --ROLLBACK
+
+	SAVEPOINT 
+
+	BEGIN TRANSACTION
+
+			STM1 	---->SE
+			STM2	----> UP
+			STM3	----> SE
+			COMMIT 
+
+	END TRANSACTION
+
+		COMMIT 
+			SAVING GROUP OF STATEMENTS AS A UNIT PARMANENTLY 
+
+		AMOUNT TRSNSACTION +  CONFIRM TRANSACTION CHECKING BALANCE 
+		
+		FROM_ACCOUNT		TO_ACCOUNT
+
+		DEBIT 			CREDIT
+
+		ACT1			ACT2
+
+		FROM_ACT 
+			UPDATE 		DEBIT	-
+			CHECK_BALANCE
+			SELECT
+
+		TO_ACT
+			UPDATE		CREDIT 	+
+			CHECK_BALANCE
+			SELECT
+
+		4 ====> 2 UPDATE 		
+
+			2 SELECT 
+		====> ALL STATEMENT SUCCESS 		===> EXECUTE SQL STATEMENT
+			====> COMMIT 
+
+		====> IF ANY STATEMENT FAILS		===> CANCEL WHOLE OPERATTION
+
+			ROLLBACK 
+
+		ROLLBACK
+			RECOVER PREVIOUS RECORDS
+		SAVEPOINT
+			SAVE RECORD AT PARTICULAR STAGE
+
+	DCL(DATA CONTROL LANGUAGE)
+		GRANT,  DENY,  REVOKE
+
+			PERMISSION 
+
+	CREATE
+		DB	----> IT'S A COLLECTION TABLES 
+			     + DB OBJECTS (STORED PROCEDURE, VIEW)
+		
+		
+	SYNTAX
+		CREATE DATABASE DATABASE_NAME;
+
+	CREATE TABLE
+
+		SYNTAX
+		CREATE TABLE TABLE_NAME
+		(
+			COLUMN_NAME1 DATA_TYPE,
+			COLUMN_NAME2 DATA_TYPE
+		)
+	DATA TYPES
+
+		NUMERICAL	INT , DECIMAL , MONEY 
+		TEXT
+				CHAR , VARCHAR(SIZE)
+		DATE		DATE VALUE		---2008
+		DATETIME	DATE + TIME
+		BINARY
+				IMAGE , VARBINARY
+		
+	ADD NEW COLUMN -TABLE
+	
+		ALTER 
+
+	SYNTAX
+		ALTER TABLE TABLE_NAME ADD COLUMN_NAME DATA_TYPE 
+		ALTER TABLE TABLE_NAME DROP COLUMN COLUMN_NAME 
+
+
+	TRUNCATE 
+		REMOVE TABLE DATA FROM DATABASE , BUT TABLE STRUCTURE(COLUMN_NAMES)
+		PRESENT
+
+	DROP
+		REMOVE COMPLETE TABLE OR DATABASE OR COLUMN COMPLETELY FROM MEMORY
+
+		DROP PARTICULAR COLUMN ====> ALTER + DROP 
+
+		DROP TABLE TABLE_NAME 
+		DROP DATABASE_NAME
+
+	INSERT 
+
+		INSERT INTO TABLE_NAME VALUES(VALUE1, VALUE2, VALUE3.....)
+
+		INSERT INTO TABLE_NAME(COLUMN_NAME1...COLUMN_NAME2..) 
+		VALUES (VALUE1, VALUE2, VALUE3....)
+
+	SELECT 
+
+		FOR RETRIEVE DATA FROM TABLE 
+
+	ALL ROWS 
+
+		SELECT * FROM TABLE_NAME 
+
+	FEW COLUMNS FROM TABLE 
+
+		SELECT COLUMN_NAME1 , COLUMN_NAME2 FROM TABLE 
+
+	OPERATORS 
+
+		LOGICAL OPERATOR
+
+		OR 
+		IN 
+		NOT IN 
+		BETWEEN
+	DATA FILES
+		WHEN WE CREATE NEW DATABASE -.MDF + .LDF
+
+		PRIMARY(MAIN) DATA FILE	--> .MDF	---REQUIRED
+			CONTAINS ALL TABLE , DB OBJECTS
+
+		SECONDARY DATA FILE	-->  .NDF	---OPTIONAL
+			PARTITION
+			USED FOR BACKUP ---LARGE DB ---> SPLIT INTO SMALLER + SMALLER
+		
+		LOG FILE		-->  .LDF 	---REQUIRED
+			CONTAINS LOG INFORMATION ---CREDENTIALS
+
+	BACK-UP
+	1. 	RESTORE --> .MDF + .LDF
+	2.      BACK-UP	--> CREATE BACK-UP FILE WITH .BACK EXTENSION RESTORE BACK 
+
+	
+STUDENT TABLE
+	STUDENT_ID 	PK
+	S101
+	S102
+	S103
+
+EXAM		MEDICAL ENTRANCE	+ 	ENG ENTRANCE
+
+	ID	USES STUDENT STUDENT_ID
+
+M101	S101
+E101	S101
+	S103
+		=====> NULL
+
+		FOREIGN KEY CAN BE DUPLICATED 
+
+		Customer 				Product
+	
+		CustId	Name  Email	     ProductId  CustId   Cost
+
+		101	c1	e1		1001	101	10000
+		102	c2	e2		1002	101	20000
+						1003    101
+						1004    102						
+						
+		PK				PK	FK	
+		
+	
+		
+FOREIGN KEY DUPLICATE ???????
+
+	CONSTRAINTS
+	===========
+
+	PRIMARY KEY
+		CONTAINS UNIQUE VALUES 
+		NOT NULL
+		ONLY ONE PRIMARY KEY PER TABLE
+
+	UNIQUE	KEY
+		CONTAINS UNIQUE VALUES 
+		CAN BE NULL
+		MORE THAN ONE UNIQUE KEY PER TABLE
+
+	FOREIGN KEY
+		PROVIDE RELATIONSHIP B/W TABLES
+		PRIMARY KEY IN ONE TABLE CAN BE USED AS FOREIGN KEY OTHER TABLE
+		PRIMARY KEY value can be used as FOREIGN KEY value in other table.
+		PRIMARY KEY COLUMN_NAME CAN DIFFERENT FROM FOREIGN KEY COLUMN_NAME
+		, VALUES MUST MATCH
+		FOREIGN KEY CAN BE DUPLICATED.
+		
+	CHECK
+		CHECK FOR RANGE VALUES 
+		COLLEGE 
+			ONLY STUDENTS CAN ADMISSION WHOSE AGE >15
+			AGE COLUMN >18 
+	DEFAULT
+		USED SET DEFAULT VALUES 
+		N/A 
+
+	GROUP BY 
+
+	SYNTAX
+
+
+	1. SELECT COLUMN_NAMES FROM TABLE_NAME WHERE CONDITION
+	 <GROUP BY> GROUP-COLUMN_NAME
+	   
+	2. SELECT COLUMN_NAMES FROM TABLE_NAME <GROUP BY> GROUP-COLUMN_NAME
+	   HAVING CONDITION		
+			
+	COLUMN_NAMES 
+		---> ONLY THOSE COLUMNS WHICH ARE PART OF <GROUP BY> KEYWORD
+		     OR AN AGGREGATE FUNCTION
+
+	CONDITION
+		WHERE  ====> ANY CONDITION WHICH DOES NOT CONTAIN AGGREGATE-FUNCTION 
+
+	CONDITION
+		HAVING ====> ANY CONDITION WHICH CONTAIN AGGREGATE-FUNCTION 
+ 
+
+	JOINS
+		GET DATA FROM MORE THAN ONE TABLE BASED ON MATCHING CONDITION
+
+	INNER JOIN
+		ONLY MATCHING RECORDS FROM BOTH TABLES
+
+	OUTER JOIN
+		MATCHING + UN-MATCHING RECORDS FROM TABLES
+
+		LEFT JOIN
+			ALL RECORDS FROM LEFT TABLE +
+			ONLY MATCHING RECORDS FROM RIGHT TABLE
+			
+		RIGHT JOIN
+			ALL RECORDS FROM RIGHT TABLE + 
+			ONLY MATCHING RECORDS FROM LEFT TABLE
+
+		FULL JOIN
+			ALL RECORDS FROM RIGHT & LEFT TABLE
+	CROSS JOIN
+		CARTESIAN PRODUCT
+		2*3 --6
+		3*4 -12 
+
+	SELF JOIN
+		SINGLE TABLE APPLY JOIN CONDITION
+	
+	HIERARCHY OF DATA
+
+		EMPLOYEE   ---->  MANAGERS	----> SENIOR MANAGER   ----> VP 
+		
+		EMPID 		   EMPID 		EMPID 			EMPID
+
+					
+	SYNTAX
+	------
+		SELECT COLUMN_NAMES(Left & right) FROM 
+		TABLE1 JOIN(INNNER,OUTER) KEYWORD
+		TABLE2 ON TABLE1.COLUMN=TABLE2.COLUMN
+		
+		
+	================================
+
+Create database CBOTraining_P3;
+--select DataBase
+use CBOTraining_P3;
+
+Create table Table_Employee
+(
+EmpId int,EmpName varchar(100),
+EmailId varchar(100),Salary money,
+DateOfJoin date
+)
+
+Alter table Table_Employee add Skill varchar(70) 
+
+insert into Table_Employee values(101,'John','john@g.com',10000,
+'2024-05-14','Java')
+insert into Table_Employee values(102,'Rock','rocks@g.com',20000,
+'2024-06-15','.Net')
+insert into Table_Employee values(103,'David','david@g.com',50000,
+'2023-12-25','Java')
+insert into Table_Employee values(104,'Adam','adam@g.com',30000,
+'2023-08-22','Testing')
+
+select * from Table_Employee
+
+select EmpName , EmailId, Skill from Table_Employee
+
+/* Alias Name -print output */
+select * from Table_Employee
+
+select EmpName as 'Name' ,EmailId 'Email',Skill 'Technology'
+from Table_Employee
+
+/* select with condition -print only particular row or rows
+	select with where keyword
+*/
+
+select * from Table_Employee where skill='java'
+
+/* OR operator--->  print all employees whose skill 
+either java or .net */
+
+select * from Table_Employee where skill='java' or skill='.net'
+
+/* IN operator--->  print all employees whose skill 
+either java or testing */
+select * from Table_Employee where skill in('java','testing')
+
+/* NOT IN -- Print All employees except testing */
+select * from Table_Employee where skill not in('testing')
+
+/*BETWEEN Print All employees whose Salary Range --> 25000 and 60000 */
+
+select * from Table_Employee where Salary between 25000 and 60000
+
+/* Like -- Print All employee start with 'A' */
+
+select * from Table_Employee where EmpName like 'A%'
+
+/* Like -- Print All employee end with 'd' */
+
+select * from Table_Employee where EmpName like '%D'
+
+/*update with Condition ---> Modify Employee David Salary */
+
+update Table_Employee set Salary=60000 where EmpId=102
+
+create table Table_Customers
+(
+	CustomerId int primary key,CustomerCode int unique,
+	CustomerName varchar(100),CustomerLocation varchar(100),
+	CustomerAge int check(CustomerAge>20),EmailID varchar(100),
+	ContactNumber bigint
+)
+create table Table_Products
+(
+	ProductId int primary key,
+	CustID int foreign key references Table_Customers(CustomerId),
+	ProductName varchar(100),Price money,
+	ProductDescription varchar(300),PurchasedDate date default getdate()
+)
+insert into Table_Customers values(101,1001,'Rocks','Chennai',25,'rock@g.c',9090909090)
+insert into Table_Customers values(102,1002,'Sachin','Banglore',30,'sachin@g.c',8080808080)
+insert into Table_Customers values(103,1003,'Rahul','Hyderbad',28,'rahul@g.c',8989898989)
+insert into Table_Customers values(104,1004,'Mohan','Banglore',45,'mohan@g.c',7878787878)
+
+insert into Table_Products values(501,101,'Samsung',5000,'Good',default)
+insert into Table_Products values(502,102,'Sony',10000,'Average','2023/10/10')
+insert into Table_Products values(503,101,'Lenovo',8000,'Good',default)
+insert into Table_Products values(504,103,'Dell',20000,'Nice, Good featue','2023/08/15')
+insert into Table_Products values(505,104,'Dell',30000,'Nice, Good featue','2023/08/20')
+insert into Table_Products values(506,103,'Samsung',40000,'Good featue',default)
+
+select * from Table_Customers
+
+/*Aggregate Functions -Max(), Min(),Avg(),Sum(),Count() 
+Highest Product Price , lowest , avg product price */
+
+select * from Table_Products
+
+select Max(Price) 'Highest Price',Min(Price) 'Low Price',
+Sum(Price) 'Total Price',Avg(Price) 'Average Price'  from Table_Products
+
+/* Find Total PriceAmount collected by Dell Product */
+select Sum(Price) from Table_Products where ProductName='Dell'
+
+/*Print ProductName and TotalPriceAmount which has more than one product*/
+
+/* Group By ----ProductName ---> Print TotalProductPrice + ProductName 
+====> Condition =====> ProductCount>1 */
+
+select productName ,Sum(Price) from Table_Products
+group by ProductName having Count(ProductName)>1
+insert into Table_Customers values(105,1005,'John','Delhi',26,'john@g.c',8787876767)
+
+select * from Table_Customers
+select * from Table_Products
+
+select CustomerName, EmailID ,ContactNumber ,ProductName ,Price
+from Table_Customers inner join Table_Products
+on Table_Customers.CustomerId=Table_Products.CustID
+
+/* Print All Customers Name & EmailID IrRespective Of they Purchased Products Or Not */
+
+select CustomerName, EmailID ,ContactNumber ,ProductName ,Price
+from Table_Customers left join Table_Products
+on Table_Customers.CustomerId=Table_Products.CustID
+
+/* Print Only those Customers Name & EmailID who purchased Product
+&& All Product Names & Price */
+
+select CustomerName, EmailID ,ContactNumber ,ProductName ,Price
+from Table_Customers right join Table_Products
+on Table_Customers.CustomerId=Table_Products.CustID
+
+/* Print All Customers Name & EmailID && All Product Names & Price */
+
+select CustomerName, EmailID ,ContactNumber ,ProductName ,Price
+from Table_Customers full join Table_Products
+on Table_Customers.CustomerId=Table_Products.CustID
+
+/* Cross Join 5*6=30 */
+
+select * from Table_Customers cross join Table_Products
+
+/* Date and Time Functions 
+Find First Day of Current Month
+Find Last Day of Current Month
+*/
+
+/* Date & Time Functions + String Functions */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
+						
+
+
+	
+	
+		
+
+
+
+----> Inner Joins --- 
+				  It Retrives Matching rows from 2 or more tables 
+				  -Matching Common Column Value
+			
+			      Outer Joins
+						Left join , Right Join , Full Join
+				  Left Join 
+				        -- It retrieves All records from Left Table 
+						   and Matching records from Right Table
+				  Right Join
+				        -- It retrieves All records from Right Table
+						   and Matching records from Left Table
+				  Full Join
+				        -- It retrieves All records from Both Left and Right tables
+					
+				  Cross Join
+					    -- Cartesian Product --3*4 ---12 
+
+	
+ Nullable Types 
+ --------------
+	Used to store null values to Value types.
+ class customer
+{
+ int? projectId;
+ double? discount;
+
+ getCustomer()
+	{
+		cw("{0}{1}",projectId,discount);		====> 0 , 0.00
+	}
+
+}
+			
+
+
+
+		
+		
+	
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+				
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+	
+
+
+
+	
+
+			
